@@ -109,7 +109,7 @@ public extension Date {
             
             return DateToolsLocalizedStrings("Last week");
         }
-        else if (components.day! >= 2) {
+        else if (components.day! >= 1 && !isYesterday) {
             return self.logicalLocalizedStringFromFormat(format: "%%d %@days ago", value: components.day!)
         }
         else if (isYesterday) {
@@ -166,7 +166,7 @@ public extension Date {
         let yesterday = date.subtract(1.days)
         let isYesterday = yesterday.day == self.day
         
-        
+        let is1d = (components.day! >= 1 && !isYesterday)
         if (components.year! >= 1) {
             return self.logicalLocalizedStringFromFormat(format: "%%d%@y", value: components.year!)
         }
@@ -176,7 +176,7 @@ public extension Date {
         else if (components.weekOfYear! >= 1) {
             return self.logicalLocalizedStringFromFormat(format: "%%d%@w", value: components.weekOfYear!)
         }
-        else if (components.day! >= 2) {
+        else if (components.day! >= 1 && !isYesterday) {
             return self.logicalLocalizedStringFromFormat(format: "%%d%@d", value: components.day!)
         }
         else if (isYesterday) {
